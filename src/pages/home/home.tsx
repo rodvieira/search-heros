@@ -1,6 +1,18 @@
-import React from 'react'
+import React, { useEffect } from 'react'
+import { AxiosHttpGetClient } from '@/service/http/axios-http-get-client/axios-http-get-client'
 
-const Login: React.FC = () => {
+const Home: React.FC = () => {
+  const fetchUsers = async () => {
+    const request = new AxiosHttpGetClient()
+    const response = await request.get({ url: 'users' });
+    
+    console.log(response);
+  };
+
+  useEffect(() => {
+    fetchUsers();
+  }, [])
+
   return (
     <div>
       Ola Mundo!
@@ -8,4 +20,4 @@ const Login: React.FC = () => {
   )
 }
 
-export default Login
+export default Home
