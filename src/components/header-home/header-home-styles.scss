@@ -1,0 +1,12 @@
+@import '@/assets/style/colors.scss';
+
+.headerHome {
+  h2 {
+    color: $black;
+    font-size: 24px;
+  }
+  p {
+    color: $darkGrey;
+    font-size: 16px;
+  }
+}
