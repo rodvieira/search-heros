@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { AxiosHttpGetClient } from '@/service/http/axios-http-get-client/axios-http-get-client'
 
-import { HeaderHome } from '@/components'
+import { HeaderHome, InputSearch } from '@/components'
 import Styles from './home-styles.scss'
 
 const Home: React.FC = () => {
@@ -17,6 +17,7 @@ const Home: React.FC = () => {
   return (
     <div className={Styles.home}>
       <HeaderHome />
+      <InputSearch />
     </div>
   )
 }
