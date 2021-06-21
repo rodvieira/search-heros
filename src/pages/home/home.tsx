@@ -1,23 +1,13 @@
-import React, { useEffect } from 'react'
-import { AxiosHttpGetClient } from '@/service/http/axios-http-get-client/axios-http-get-client'
+import React from 'react'
 
-import { HeaderHome, InputSearch } from '@/components'
+import { HeaderHome, FiltersContent } from '@/components'
 import Styles from './home-styles.scss'
 
 const Home: React.FC = () => {
-  const fetchUsers = async () => {
-    const request = new AxiosHttpGetClient()
-    const response = await request.get({ url: '/characters' })
-  };
-
-  useEffect(() => {
-    fetchUsers();
-  }, [])
-
   return (
     <div className={Styles.home}>
       <HeaderHome />
-      <InputSearch />
+      <FiltersContent />
     </div>
   )
 }

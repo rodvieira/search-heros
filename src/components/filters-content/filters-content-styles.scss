@@ -1,0 +1,37 @@
+@import '@/assets/style/colors.scss';
+
+.filtersContent {
+  margin-top: 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  .count {
+    span {
+      color: $grey;
+    }
+  }
+  .filters {
+    display: flex;
+    align-items: center;
+
+    .orders {
+      display: flex;
+      align-items: center;
+
+      .toggle {
+        margin: 0 26px;
+      }
+    }
+
+    .favorites {
+      display: flex;
+      align-items: center;
+    }
+
+    span {
+      color: $red;
+      margin-left: 12px;
+    }
+  }
+}
