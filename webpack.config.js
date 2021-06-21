@@ -35,6 +35,10 @@ module.exports = {
           { loader: 'sass-loader' },
         ],
       },
+      {
+        test: /\.(jpe?g|png|gif|svg)$/i,
+        loader: 'url-loader'
+      }
     ],
   },
   devServer: {
