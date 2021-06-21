@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react'
 
 import { AxiosHttpGetClient } from '@/service/http/axios-http-get-client/axios-http-get-client'
 import { Container, HeaderHome, FiltersContent, FlexContent, CardHero } from '@/components'
-import Styles from './home-styles.scss'
 
 const Home: React.FC = () => {
 
