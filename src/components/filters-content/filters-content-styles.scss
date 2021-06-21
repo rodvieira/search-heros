@@ -1,37 +1,46 @@
 @import '@/assets/style/colors.scss';
 
 .filtersContent {
-  margin-top: 40px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-
-  .count {
-    span {
-      color: $grey;
-    }
-  }
-  .filters {
+  margin-bottom: 24px;
+  text-align: center;
+  
+  .countFiltersContent {
+    margin-top: 40px;
     display: flex;
+    justify-content: space-between;
     align-items: center;
+    flex-wrap: wrap;
 
-    .orders {
-      display: flex;
-      align-items: center;
-
-      .toggle {
-        margin: 0 26px;
+    .count {
+      span {
+        color: $grey;
       }
     }
-
-    .favorites {
+  
+    .filters {
       display: flex;
       align-items: center;
-    }
-
-    span {
-      color: $red;
-      margin-left: 12px;
+      flex-wrap: wrap;
+  
+      .orders {
+        display: flex;
+        align-items: center;
+        margin: 12px 0;
+  
+        .toggle {
+          margin: 0 26px;
+        }
+      }
+  
+      .favorites {
+        display: flex;
+        align-items: center;
+      }
+  
+      span {
+        color: $red;
+        margin-left: 12px;
+      }
     }
   }
 }
