@@ -19,7 +19,7 @@ const Home: React.FC = () => {
     fetchCharacters();
   }, [])
   return (
-    <Container>
+    <Container size="1200">
       <HeaderHome />
       <FiltersContent />
       <FlexContent>
