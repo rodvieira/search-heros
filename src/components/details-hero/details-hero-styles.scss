@@ -1,0 +1,68 @@
+@import '@/assets/style/colors.scss';
+
+.descriptionHero {
+  width: 25%;
+  color: $black;
+  padding: 56px 0;
+
+  .nameHero {
+    display: flex;
+    justify-content: space-between;
+
+    h1 {
+      font-size: 40px;
+    }
+  }
+
+  p {
+    margin: 24px 0;
+    font-weight: 500;
+    color: $darkGrey;
+    line-height: 28px;
+  }
+
+  span {
+    color: $black;
+    font-weight: 600;
+  }
+
+  img {
+    vertical-align: middle;
+  }
+
+  .detailsHero {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 32px;
+    
+    p {
+      color: $black;
+      font-weight: 600;
+      margin-bottom: 16px;
+      display: block;
+    }
+
+    img {
+      margin-right: 12px;
+    }
+
+    span {
+      font-weight: normal;
+    }
+  }
+
+  .rating {
+    margin-bottom: 32px;
+
+    span {
+      margin-right: 12px;
+    }
+  }
+
+  .lastComics {
+    span:last-child {
+      font-weight: normal;
+      margin-left: 12px;
+    }
+  }
+}
