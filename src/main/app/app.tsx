@@ -1,11 +1,11 @@
 import React from 'react'
-import { Home } from '@/pages'
+import Router from '@/router/router'
 import { Footer } from '@/components'
 
 const App: React.FC = () => {
   return (
     <>
-      <Home />
+      <Router />
       <Footer />
     </>
   )

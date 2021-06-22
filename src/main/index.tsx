@@ -1,17 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 
-import { Home } from '@/pages'
-import { Footer } from '@/components'
+import App from './app/app'
 import '@/assets/style/global.scss'
-
-const App: React.FC = () => {
-  return (
-    <>
-      <Home />
-      <Footer />
-    </>
-  )
-}
 
 ReactDOM.render(<App />, document.getElementById('main'))
