@@ -1,11 +1,17 @@
 import React from 'react'
 import Styles from './input-search-styles.scss'
 
-const InputSearch: React.FC = () => {
+type Props = {
+  custom?: Boolean
+}
+
+const InputSearch: React.FC<Props> = ({ custom }: Props) => {
   return (
-    <div className={Styles.inputSearch}>
-      <input type="text" placeholder="Procure por heróis" />
-    </div>
+    <input
+      type="text"
+      placeholder="Procure por heróis"
+      className={`${Styles.inputSearch} ${custom && Styles.custom}`}
+    />
   )
 }
 

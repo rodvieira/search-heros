@@ -8,7 +8,7 @@ import Styles from './filters-content-styles.scss'
 const FiltersContent: React.FC = () => {
   return (
     <div className={Styles.filtersContent}>
-      <InputSearch />
+      <InputSearch custom />
       <div className={Styles.countFiltersContent}>
         <div className={Styles.count}>
           <span>Encontrado 20 heróis</span>
