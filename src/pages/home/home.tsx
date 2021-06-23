@@ -9,24 +9,40 @@ const Home: React.FC = () => {
   const [heros, setHeros] = useState([])
   const history = useHistory()
 
-  const fetchCharacters = async () => {
-    const req = new AxiosHttpGetClient();
-    const res = await req.get({ url: '/characters' })
-    const { data } = res
-
-    setHeros(data.data.results)
+  const fetchCharacters = async (url: string) => {
+    try {
+      const http = new AxiosHttpGetClient();
+      const { data } = await http.get({ url })
+      setHeros(data.data.results)
+    } catch (error) {
+      alert(error)
+    }
   };
+
+  const orderList = (order: Boolean) => {
+    const url = `/characters?orderBy=${order ? 'name' : '-modified'}`
+    fetchCharacters(url)
+  }
+
+  const filterQueryList = (query: string) => {
+    const url = `/characters?nameStartsWith=${query}`
+    fetchCharacters(query ? url : '/characters?orderBy=-modified')
+  }
 
   const pushToHero = (id: number) => history.push(`/hero/${id}`)
   
   useEffect(() => {
-    fetchCharacters();
+    fetchCharacters('/characters?orderBy=-modified');
   }, [])
 
   return (
     <Container size="1200">
       <HeaderHome />
-      <FiltersContent />
+      <FiltersContent
+        orderList={orderList}
+        queryList={(e: string) => filterQueryList(e)}
+        amount={heros.length}
+      />
       <FlexContent>
         {heros.map(hero => (
           <CardHero
