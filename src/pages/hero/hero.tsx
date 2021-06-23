@@ -21,6 +21,7 @@ const Hero: React.FC = () => {
     const dataCharacterComics = res2.data.data.results
 
     setCharacter({
+      id: dataCharacter.id,
       name: dataCharacter.name,
       description: dataCharacter.description,
       comicsCount: dataCharacter.comics.available,
