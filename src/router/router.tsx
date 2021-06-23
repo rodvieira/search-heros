@@ -8,7 +8,7 @@ const Router: React.FC = () =>{
     <BrowserRouter>
       <Switch>
         <Route path="/" exact component={Home} />
-        <Route path="/hero" exact component={Hero} />
+        <Route path="/hero/:id" exact component={Hero} />
       </Switch>
     </BrowserRouter>
   )
