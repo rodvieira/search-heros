@@ -5,11 +5,12 @@ import Styles from './card-hero-styles.scss'
 type Props = {
   thumbnail: string
   name: string
+  onClick: Function
 }
 
-const CardHero: React.FC<Props> = ({ thumbnail, name }: Props) => {
+const CardHero: React.FC<Props> = ({ thumbnail, name, onClick }: Props) => {
   return (
-    <div className={Styles.cardHero}>
+    <div className={Styles.cardHero} onClick={() => onClick()}>
       <div className={Styles.thumbnail}>
         <img src={thumbnail} />
       </div>

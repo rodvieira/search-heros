@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react'
+import { useHistory } from 'react-router-dom';
+
 
 import { AxiosHttpGetClient } from '@/service/http/axios-http-get-client/axios-http-get-client'
 import { Container, HeaderHome, FiltersContent, FlexContent, CardHero } from '@/components'
 
 const Home: React.FC = () => {
-
   const [heros, setHeros] = useState([])
+  const history = useHistory()
 
   const fetchCharacters = async () => {
     const req = new AxiosHttpGetClient();
@@ -15,9 +17,12 @@ const Home: React.FC = () => {
     setHeros(data.data.results)
   };
 
+  const pushToHero = (id: number) => history.push(`/hero/${id}`)
+  
   useEffect(() => {
     fetchCharacters();
   }, [])
+
   return (
     <Container size="1200">
       <HeaderHome />
@@ -27,6 +32,7 @@ const Home: React.FC = () => {
           <CardHero
             thumbnail={`${hero.thumbnail.path}.${hero.thumbnail.extension}`}
             name={hero.name}
+            onClick={() => pushToHero(hero.id)}
           />
         ))}
       </FlexContent>
