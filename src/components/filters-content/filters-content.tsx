@@ -1,23 +1,28 @@
 import React from 'react'
 import IconHeroi from '@/assets/ic_heroi.svg'
-import IconToggleOn from '@/assets/toggle_on.svg'
 import IconFavorite from '@/assets/favorito_01.svg'
-import { InputSearch } from '@/components'
+import { InputSearch, Toggle } from '@/components'
 import Styles from './filters-content-styles.scss'
 
-const FiltersContent: React.FC = () => {
+type Props = {
+  orderList: Function
+  queryList: Function
+  amount: Number
+}
+
+const FiltersContent: React.FC<Props> = ({ orderList, queryList, amount }: Props) => {
   return (
     <div className={Styles.filtersContent}>
-      <InputSearch custom />
+      <InputSearch custom sendQuery={(e: string) => queryList(e)} />
       <div className={Styles.countFiltersContent}>
         <div className={Styles.count}>
-          <span>Encontrado 20 heróis</span>
+          <span>Encontrado {amount} heróis</span>
         </div>
         <div className={Styles.filters}>
           <div className={Styles.orders}>
             <img src={IconHeroi} />
             <span>Ordernar por nome - A/Z</span>
-            <img src={IconToggleOn} className={Styles.toggle} />
+            <Toggle onClick={(e: Boolean) => orderList(e)} />
           </div>
           <div className={Styles.favorites}>
             <img src={IconFavorite} />
