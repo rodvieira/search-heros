@@ -1,8 +1,18 @@
 .headerHero {
   display: flex;
+  flex-wrap: wrap;
   padding: 20px 40px;
 
   img {
     margin-right: 40px;
+  }
+
+  @media (max-width: 768px) {
+    justify-content: center;
+    padding: 20px 0;
+
+    img {
+      margin-bottom: 16px;
+    }
   }
 }
