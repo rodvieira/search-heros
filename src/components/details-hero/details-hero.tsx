@@ -5,17 +5,11 @@ import IconTrailer from '@/assets/ic_trailer.svg'
 import IconComics from '@/assets/ic_quadrinhos.svg'
 import IconPositive from '@/assets/avaliacao_on.svg'
 
-import { Thumbnail } from '@/protocols/thumbnail'
+import { Character } from '@/protocols/character'
 import Styles from './details-hero-styles.scss'
 
 type Props = {
-  character: {
-    name: string
-    description: string
-    comicsCount: number
-    seriesCount: number
-    thumbnail: Thumbnail
-  }
+  character: Character
 }
 
 const DetailsHero: React.FC<Props> = ({ character }: Props) => {

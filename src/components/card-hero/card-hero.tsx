@@ -1,22 +1,24 @@
 import React from 'react'
-import IconFavorite from '@/assets/favorito_01.svg'
+
+import { Favorite } from '@/components'
 import Styles from './card-hero-styles.scss'
 
 type Props = {
   thumbnail: string
   name: string
   onClick: Function
+  favoriteEvent: Function
 }
 
-const CardHero: React.FC<Props> = ({ thumbnail, name, onClick }: Props) => {
+const CardHero: React.FC<Props> = ({ thumbnail, name, onClick, favoriteEvent }: Props) => {
   return (
-    <div className={Styles.cardHero} onClick={() => onClick()}>
-      <div className={Styles.thumbnail}>
+    <div className={Styles.cardHero}>
+      <div className={Styles.thumbnail} onClick={() => onClick()}>
         <img src={thumbnail} />
       </div>
       <div className={Styles.infoHero}>
         <span>{name}</span>
-        <img src={IconFavorite} />
+        <Favorite onClick={(event: Boolean) => favoriteEvent(event)}/>
       </div>
     </div>
   )
