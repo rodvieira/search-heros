@@ -1,23 +1,18 @@
-import React, { useState } from 'react'
+import React from 'react'
 
 import IconFavoriteOn from '@/assets/favorito_01.svg'
 import IconFavoriteOff from '@/assets/favorito_02.svg'
 
 type Props = {
   onClick: Function
+  favorite: boolean
 }
 
-const Favorite: React.FC<Props> = ({ onClick }: Props) => {
-  const [status, setStatus] = useState<Boolean>(false)
-
-  const handleClick = (e: Boolean) => {
-    onClick(e)
-    setStatus(e)
-  }
+const Favorite: React.FC<Props> = ({ onClick, favorite }: Props) => {
 
   return (
-    <a onClick={() => handleClick(!status)}>
-      <img src={status ? IconFavoriteOn : IconFavoriteOff} />
+    <a onClick={() => onClick(!favorite)}>
+      <img src={favorite ? IconFavoriteOn : IconFavoriteOff} />
     </a>
   )
 }
