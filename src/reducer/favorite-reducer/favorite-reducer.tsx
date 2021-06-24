@@ -1,5 +1,4 @@
 import { Character } from '@/protocols/character'
-import { database } from 'faker'
 
 type FavoriteState = {
   favorites: Character[]
@@ -22,11 +21,9 @@ export const FavoriteReducer = (state: FavoriteState, action: FavoriteAction) =>
         favorites: [...state.favorites, action.data]
       }
     case 'REMOVE_FAVORITE':
-      const index = state.favorites.findIndex(item => item.id === action.data.id)
-      const newState = [...state.favorites]
       return {
         ...state,
-        favorites: newState.splice(index, 1)
+        favorites: state.favorites.filter(item => item.id !== action.data.id)
       }
     default:
       throw state
