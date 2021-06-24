@@ -61,6 +61,11 @@ const Home: React.FC = () => {
     })
   }
 
+  const listFavorite = (event: boolean) => {
+    event ? setCharacters(state.favorites)
+    : fetchCharacters('/characters?orderBy=-modified')
+  } 
+
   const pushToHero = (id: number) => history.push(`/hero/${id}`)
   
   useEffect(() => {
@@ -73,6 +78,7 @@ const Home: React.FC = () => {
       <FiltersContent
         orderList={orderList}
         queryList={(e: string) => filterQueryList(e)}
+        favoriteList={(e: boolean) => listFavorite(e)}
         amount={characters.length}
       />
       <FlexContent>
