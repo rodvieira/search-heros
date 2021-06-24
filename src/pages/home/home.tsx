@@ -15,13 +15,22 @@ const Home: React.FC = () => {
     try {
       const http = new AxiosHttpGetClient();
       const { data } = await http.get({ url })
-      setCharacters(data.data.results)
+      setCharacters(setAttribute(data.data.results, 'favorite', false))
     } catch (error) {
       alert(error)
     }
   };
 
-  const orderList = (order: Boolean) => {
+  const setAttribute = (data: Character[], attr: string, value: any) => {
+    return data.map(item => {
+      return {
+        ...item,
+        [attr]: value
+      }
+    })
+  }
+
+  const orderList = (order: boolean) => {
     const url = `/characters?orderBy=${order ? 'name' : '-modified'}`
     fetchCharacters(url)
   }
@@ -31,15 +40,23 @@ const Home: React.FC = () => {
     fetchCharacters(query ? url : '/characters?orderBy=-modified')
   }
 
-  const changeFavorite = (event: Boolean, favoriteCharacter: Character) => {
+  const changeFavorite = (event: boolean, favoriteCharacter: Character) => {
+    const countfavorites = state.favorites.length < 5
+
     const character = {
       id: favoriteCharacter.id,
       name: favoriteCharacter.name,
-      thumbnail:  favoriteCharacter.thumbnail
+      thumbnail:  favoriteCharacter.thumbnail,
+      favorite: event && countfavorites 
     }
 
+    const index = characters.findIndex(item => item.id === favoriteCharacter.id)
+    const newCharacters = [...characters]
+    newCharacters[index].favorite = event && countfavorites 
+    setCharacters(newCharacters)
+
     dispatch({
-      type: event ? 'ADD_FAVORITE' : 'REMOVE_FAVORITE',
+      type: event && countfavorites ? 'ADD_FAVORITE' : 'REMOVE_FAVORITE',
       data: { ...character }
     })
   }
@@ -49,9 +66,6 @@ const Home: React.FC = () => {
   useEffect(() => {
     fetchCharacters('/characters?orderBy=-modified');
   }, [])
-  useEffect(() => {
-    console.log(state)
-  }, [state])
 
   return (
     <Container size="1200">
@@ -64,10 +78,9 @@ const Home: React.FC = () => {
       <FlexContent>
         {characters.map(character => (
           <CardHero
-            favoriteEvent={(event: Boolean) => changeFavorite(event, character)}
-            thumbnail={`${character.thumbnail.path}.${character.thumbnail.extension}`}
-            name={character.name}
-            onClick={() => pushToHero(character?.id)}
+            character={character}
+            favoriteEvent={(event: boolean) => changeFavorite(event, character)}
+            onClick={() => pushToHero(character.id)}
           />
         ))}
       </FlexContent>
