@@ -12,7 +12,8 @@
       "@/*": ["*"]
     },
     "allowJs": true,
-    "resolveJsonModule": true
+    "resolveJsonModule": true,
+    "types": ["cypress"]
   },
   "include": ["src"]
 }
