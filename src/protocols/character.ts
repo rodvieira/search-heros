@@ -7,4 +7,5 @@ export interface Character {
   comicsCount?: number
   seriesCount?: number
   thumbnail: Thumbnail
+  favorite?: boolean
 }
