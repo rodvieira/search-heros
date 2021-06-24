@@ -36,3 +36,10 @@ npm install ou yarn install
 ```
 npm start ou yarn start
 ```
+### Testes
+
+Para executar o teste:
+
+```
+npm run cypress:open ou yarn cypress:open
+```
