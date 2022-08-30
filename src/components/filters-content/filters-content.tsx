@@ -25,7 +25,7 @@ const FiltersContent: React.FC<Props> = ({ orderList, queryList, favoriteList, a
       <InputSearch custom sendQuery={(e: string) => queryList(e)} />
       <div className={Styles.countFiltersContent}>
         <div className={Styles.count}>
-          <span>Encontrado {amount} heróis</span>
+          <span>{`Encontrado ${amount || 0} heróis`}</span>
         </div>
         <div className={Styles.filters}>
           <div className={Styles.orders}>

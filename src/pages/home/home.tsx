@@ -1,5 +1,5 @@
 import React, { useEffect, useReducer, useState } from 'react'
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 import { initialState, FavoriteReducer } from '@/reducer/favorite-reducer/favorite-reducer'
 import { AxiosHttpGetClient } from '@/service/http/axios-http-get-client/axios-http-get-client'
@@ -7,7 +7,7 @@ import { Container, HeaderHome, FiltersContent, FlexContent, CardHero } from '@/
 import { Character } from '@/protocols/character'
 
 const Home: React.FC = () => {
-  const history = useHistory()
+  const navigate = useNavigate()
   const [state, dispatch] = useReducer(FavoriteReducer, initialState)
   const [characters, setCharacters] = useState<Character[]>([])
 
@@ -66,7 +66,7 @@ const Home: React.FC = () => {
     : fetchCharacters('/characters?orderBy=-modified')
   } 
 
-  const pushToHero = (id: number) => history.push(`/hero/${id}`)
+  const pushToHero = (id: number) => navigate(`/hero/${id}`)
   
   useEffect(() => {
     fetchCharacters('/characters?orderBy=-modified');

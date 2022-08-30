@@ -1,15 +1,15 @@
   
 import React from 'react'
-import { BrowserRouter, Switch, Route } from 'react-router-dom'
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import { Home, Hero } from '@/pages'
 
-const Router: React.FC = () =>{
+const Router: React.FC = () => {
   return (
     <BrowserRouter>
-      <Switch>
-        <Route path="/" exact component={Home} />
-        <Route path="/hero/:id" exact component={Hero} />
-      </Switch>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/hero/:id" element={<Hero />} />
+      </Routes>
     </BrowserRouter>
   )
 }
