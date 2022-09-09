@@ -52,11 +52,10 @@ module.exports = {
     historyApiFallback: true,
     port: 8080
   },
-  externals: {
-    react: 'React',
-    'react-dom': 'ReactDOM',
-  },
-  plugins: [new CleanWebpackPlugin(), new HtmlWebpackPlugin({
-    template: './template.dev.html'
-  })],
+  plugins: [
+    new CleanWebpackPlugin(),
+    new HtmlWebpackPlugin({
+      template: './template.dev.html'
+    })
+  ],
 }
