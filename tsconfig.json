@@ -13,7 +13,7 @@
     },
     "allowJs": true,
     "resolveJsonModule": true,
-    "types": ["cypress"]
   },
-  "include": ["src"]
+  "include": ["src"],
+  "exclude": ["src/test"]
 }
