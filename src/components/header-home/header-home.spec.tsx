@@ -7,7 +7,7 @@ const makeSut = () => {
 }
 
 describe('HeaderHome Component', () => {
-  test('Should render thats', () => {
+  test('Should render HeaderHome', () => {
     const headerHome = makeSut()
     const title = headerHome.getByTestId('title')
     const description = headerHome.getByTestId('description')
