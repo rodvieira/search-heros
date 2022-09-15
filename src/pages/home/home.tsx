@@ -3,21 +3,25 @@ import { useNavigate } from 'react-router-dom';
 
 import { initialState, FavoriteReducer } from '@/reducer/favorite-reducer/favorite-reducer'
 import { AxiosHttpGetClient } from '@/service/http/axios-http-get-client/axios-http-get-client'
-import { Container, HeaderHome, FiltersContent, FlexContent, CardHero } from '@/components'
+import { Container, HeaderHome, FiltersContent, FlexContent, CardHero, Loading } from '@/components'
 import { Character } from '@/protocols/character'
 
 const Home: React.FC = () => {
   const navigate = useNavigate()
   const [state, dispatch] = useReducer(FavoriteReducer, initialState)
   const [characters, setCharacters] = useState<Character[]>([])
+  const [loading, setLoading] = useState(false)
 
   const fetchCharacters = async (url: string) => {
     try {
+      setLoading(true)
       const http = new AxiosHttpGetClient();
       const { data } = await http.get({ url })
       setCharacters(setAttribute(data.data.results, 'favorite', false))
     } catch (error) {
       alert(error)
+    } finally {
+      setLoading(false)
     }
   };
 
@@ -81,15 +85,19 @@ const Home: React.FC = () => {
         favoriteList={(e: boolean) => listFavorite(e)}
         amount={characters.length}
       />
-      <FlexContent>
-        {characters.map(character => (
-          <CardHero
-            character={character}
-            favoriteEvent={(event: boolean) => changeFavorite(event, character)}
-            onClick={() => pushToHero(character.id)}
-          />
-        ))}
-      </FlexContent>
+      {loading ? (
+        <Loading />
+      ) : (
+        <FlexContent>
+          {characters.map(character => (
+            <CardHero
+              character={character}
+              favoriteEvent={(event: boolean) => changeFavorite(event, character)}
+              onClick={() => pushToHero(character.id)}
+            />
+          ))}
+        </FlexContent>
+      )}
     </Container>
   )
 }
