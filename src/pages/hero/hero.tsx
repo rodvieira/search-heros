@@ -44,7 +44,7 @@ const Hero: React.FC = () => {
   }, [])
 
   return (
-    <div style={{ background: '#e7f6e7'}}>
+    <div style={{ background: '#e7f6e7', flex: '1 0 auto'}}>
       <HeaderHero />
       <Container size="1200">
         <DetailsHero character={character} />

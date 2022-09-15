@@ -10,7 +10,7 @@ const Home: React.FC = () => {
   const navigate = useNavigate()
   const [state, dispatch] = useReducer(FavoriteReducer, initialState)
   const [characters, setCharacters] = useState<Character[]>([])
-  const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState(true)
 
   const fetchCharacters = async (url: string) => {
     try {
