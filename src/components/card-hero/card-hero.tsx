@@ -14,10 +14,10 @@ const CardHero: React.FC<Props> = ({ character, onClick, favoriteEvent }: Props)
   return (
     <div className={Styles.cardHero}>
       <div className={Styles.thumbnail} onClick={onClick}>
-        <img src={`${character.thumbnail.path}.${character.thumbnail.extension}`} />
+        <img data-testid="character-image" src={`${character.thumbnail.path}.${character.thumbnail.extension}`} />
       </div>
       <div className={Styles.infoHero}>
-        <span>{character.name}</span>
+        <span data-testid="character-name">{character.name}</span>
         <Favorite favorite={character.favorite} onClick={(event: boolean) => favoriteEvent(event)}/>
       </div>
     </div>
