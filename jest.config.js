@@ -6,6 +6,9 @@ module.exports = {
     '!<rootDir>/src/**/index.ts',
     '!**/*.d.ts'
   ],
+  setupFilesAfterEnv: [
+    "<rootDir>/src/main/config/setupTests.ts"
+ ],
   coverageDirectory: 'coverage',
   testPathIgnorePatterns: [
     '<rootDir>/node_modules/',
