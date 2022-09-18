@@ -9,7 +9,7 @@ type Props = {
 
 const Container: React.FC<Props> = ({ children, size }: Props) => {
   return (
-    <div className={Styles.container} style={{ maxWidth: `${size}px` }}>
+    <div data-testid="container" className={Styles.container} style={{ maxWidth: `${size}px` }}>
       {children}
     </div>
   )
