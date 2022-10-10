@@ -5,13 +5,13 @@ import IconToggleOff from '@/assets/toggle_off.svg'
 import Styles from './toggle-styles.scss'
 
 type Props = {
-  onClick: Function
+  onClick: (status: boolean) => void
 }
 
 const Toggle: React.FC<Props> = ({ onClick }: Props) => {
-  const [status, setStatus] = useState<Boolean>(false);
+  const [status, setStatus] = useState<boolean>(false);
 
-  const handleClick = (e: Boolean) => {
+  const handleClick = (e: boolean) => {
     onClick(e)
     setStatus(e)
   }

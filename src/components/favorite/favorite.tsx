@@ -4,7 +4,7 @@ import IconFavoriteOn from '@/assets/favorito_01.svg'
 import IconFavoriteOff from '@/assets/favorito_02.svg'
 
 type Props = {
-  onClick: Function
+  onClick: (favorite: boolean) => void
   favorite: boolean
 }
 

@@ -6,10 +6,10 @@ import { InputSearch, Toggle } from '@/components'
 import Styles from './filters-content-styles.scss'
 
 type Props = {
-  orderList: Function
-  queryList: Function
-  favoriteList: Function
-  amount: Number
+  orderList: (order: boolean) => void
+  queryList: (query: string) => void
+  favoriteList: (favorite: boolean) => void
+  amount: number
 }
 
 const FiltersContent: React.FC<Props> = ({ orderList, queryList, favoriteList, amount }: Props) => {
@@ -31,7 +31,7 @@ const FiltersContent: React.FC<Props> = ({ orderList, queryList, favoriteList, a
           <div className={Styles.orders}>
             <img src={IconHeroi} />
             <span>Ordernar por nome - A/Z</span>
-            <Toggle onClick={(e: Boolean) => orderList(e)} />
+            <Toggle onClick={(e: boolean) => orderList(e)} />
           </div>
           <a className={Styles.favorites} onClick={() => changeFavorite()}>
             <img src={favorite ? IconFavoriteOn : IconFavoriteOff} />
