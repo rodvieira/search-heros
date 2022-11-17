@@ -43,4 +43,12 @@ describe('CardHero Component', () => {
     fireEvent.click(characterLink)
     expect(onClickFn).toHaveBeenCalledTimes(1)
   })
+
+  test('Should call favoriteEventFn function when click in favorite', () => {
+    const favoriteEventFn = jest.fn()
+    makeSut(jest.fn(), favoriteEventFn)
+    const favoriteWrap = screen.getByTestId('favorite-wrap')
+    fireEvent.click(favoriteWrap)
+    expect(favoriteEventFn).toHaveBeenCalledTimes(1)
+  })
 });

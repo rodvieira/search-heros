@@ -11,7 +11,7 @@ type Props = {
 const Favorite: React.FC<Props> = ({ onClick, favorite }: Props) => {
 
   return (
-    <a onClick={() => onClick(!favorite)}>
+    <a data-testid="favorite-wrap" onClick={() => onClick(!favorite)}>
       <img src={favorite ? IconFavoriteOn : IconFavoriteOff} />
     </a>
   )
