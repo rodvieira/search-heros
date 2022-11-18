@@ -17,18 +17,21 @@ const characterMock: Character = {
   favorite: false
 }
 
-const makeSut = (onClickFn = jest.fn(), favoriteEventFn = jest.fn()) => {
+const onClickMock = jest.fn()
+const favoriteEventMock = jest.fn()
+
+const makeSut = () => {
   return render(
     <CardHero
       character={characterMock}
-      onClick={onClickFn}
-      favoriteEvent={favoriteEventFn}
+      onClick={onClickMock}
+      favoriteEvent={favoriteEventMock}
     />
   )
 }
 
 describe('CardHero Component', () => {
-  test('Should render CardHero', () => {
+  test('Should render CardHero with correct values', () => {
     makeSut()
     const heroName = screen.getByTestId('character-name')
     const heroImage = screen.getByTestId('character-image')
@@ -37,18 +40,23 @@ describe('CardHero Component', () => {
   });
 
   test('Should call onClick function when click in link', () => {
-    const onClickFn = jest.fn()
-    makeSut(onClickFn)
+    makeSut()
     const characterLink = screen.getByTestId('character-link')
     fireEvent.click(characterLink)
-    expect(onClickFn).toHaveBeenCalledTimes(1)
+    expect(onClickMock).toHaveBeenCalledTimes(1)
   })
 
-  test('Should call favoriteEventFn function when click in favorite', () => {
-    const favoriteEventFn = jest.fn()
-    makeSut(jest.fn(), favoriteEventFn)
+  test('Should call favoriteEvent function when click in favorite', () => {
+    makeSut()
     const favoriteWrap = screen.getByTestId('favorite-wrap')
     fireEvent.click(favoriteWrap)
-    expect(favoriteEventFn).toHaveBeenCalledTimes(1)
+    expect(favoriteEventMock).toHaveBeenCalledTimes(1)
+  })
+
+  test('Should call favoriteEvent function with correct value', () => {
+    makeSut()
+    const favoriteWrap = screen.getByTestId('favorite-wrap')
+    fireEvent.click(favoriteWrap)
+    expect(favoriteEventMock).toHaveBeenCalledWith(!characterMock.favorite)
   })
 });
