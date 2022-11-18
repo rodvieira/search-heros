@@ -1,29 +1,16 @@
-import React, { useEffect, useReducer, useState } from 'react'
+import React, {  useReducer } from 'react'
 import { useNavigate } from 'react-router-dom';
 
 import { initialState, FavoriteReducer } from '@/reducer/favorite-reducer/favorite-reducer'
-import { AxiosHttpGetClient } from '@/service/http/axios-http-get-client/axios-http-get-client'
 import { Container, HeaderHome, FiltersContent, FlexContent, CardHero, Loading } from '@/components'
 import { Character } from '@/protocols/character'
+import { useFetchCharacters } from '@/hooks/useFetchCharacters';
 
 const Home: React.FC = () => {
   const navigate = useNavigate()
   const [state, dispatch] = useReducer(FavoriteReducer, initialState)
-  const [characters, setCharacters] = useState<Character[]>([])
-  const [loading, setLoading] = useState(true)
-
-  const fetchCharacters = async (url: string) => {
-    try {
-      setLoading(true)
-      const http = new AxiosHttpGetClient();
-      const { data } = await http.get({ url })
-      setCharacters(setAttribute(data.data.results, 'favorite', false))
-    } catch (error) {
-      alert(error)
-    } finally {
-      setLoading(false)
-    }
-  };
+  const { characters, fetchCharacters, loading } = useFetchCharacters()
+  
 
   const setAttribute = (data: Character[], attr: string, value: any) => {
     return data.map(item => {
@@ -57,7 +44,6 @@ const Home: React.FC = () => {
     const index = characters.findIndex(item => item.id === favoriteCharacter.id)
     const newCharacters = [...characters]
     newCharacters[index].favorite = event && countfavorites 
-    setCharacters(newCharacters)
 
     dispatch({
       type: event && countfavorites ? 'ADD_FAVORITE' : 'REMOVE_FAVORITE',
@@ -65,16 +51,8 @@ const Home: React.FC = () => {
     })
   }
 
-  const listFavorite = (event: boolean) => {
-    event ? setCharacters(state.favorites)
-    : fetchCharacters('/characters?orderBy=-modified')
-  } 
-
   const pushToHero = (id: number) => navigate(`/hero/${id}`)
-  
-  useEffect(() => {
-    fetchCharacters('/characters?orderBy=-modified');
-  }, [])
+
 
   return (
     <Container size="1200">
@@ -82,7 +60,7 @@ const Home: React.FC = () => {
       <FiltersContent
         orderList={orderList}
         queryList={(e: string) => filterQueryList(e)}
-        favoriteList={(e: boolean) => listFavorite(e)}
+        favoriteList={(e: boolean) => {}}
         amount={characters.length}
       />
       {loading ? (
