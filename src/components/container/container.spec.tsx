@@ -16,5 +16,5 @@ describe('Container Component', () => {
     const container = screen.getByTestId('container')
     expect(container.style.maxWidth).toBe('500px')
     expect(container.children.length).toBe(1)
-  });
-});
+  })
+})

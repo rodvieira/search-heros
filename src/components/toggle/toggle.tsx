@@ -9,7 +9,7 @@ type Props = {
 }
 
 const Toggle: React.FC<Props> = ({ onClick }: Props) => {
-  const [status, setStatus] = useState<boolean>(false);
+  const [status, setStatus] = useState<boolean>(false)
 
   const handleClick = (e: boolean) => {
     onClick(e)
@@ -18,7 +18,10 @@ const Toggle: React.FC<Props> = ({ onClick }: Props) => {
 
   return (
     <a onClick={() => handleClick(!status)}>
-      <img src={status ? IconToggleOn : IconToggleOff} className={Styles.toggle} />
+      <img
+        src={status ? IconToggleOn : IconToggleOff}
+        className={Styles.toggle}
+      />
     </a>
   )
 }

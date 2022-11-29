@@ -12,9 +12,9 @@ const characterMock: Character = {
   seriesCount: 3,
   thumbnail: {
     path: 'path',
-    extension: 'png'
+    extension: 'png',
   },
-  favorite: false
+  favorite: false,
 }
 
 const onClickMock = jest.fn()
@@ -36,8 +36,11 @@ describe('CardHero Component', () => {
     const heroName = screen.getByTestId('character-name')
     const heroImage = screen.getByTestId('character-image')
     expect(heroName.textContent).toBe(characterMock.name)
-    expect(heroImage).toHaveAttribute('src', `${characterMock.thumbnail.path}.${characterMock.thumbnail.extension}`)
-  });
+    expect(heroImage).toHaveAttribute(
+      'src',
+      `${characterMock.thumbnail.path}.${characterMock.thumbnail.extension}`
+    )
+  })
 
   test('Should call onClick function when click in link', () => {
     makeSut()
@@ -59,4 +62,4 @@ describe('CardHero Component', () => {
     fireEvent.click(favoriteWrap)
     expect(favoriteEventMock).toHaveBeenCalledWith(!characterMock.favorite)
   })
-});
+})

@@ -3,12 +3,12 @@ import { AxiosHttpInstace, Params } from '../protocols/axios-http-instance'
 
 export class AxiosHttpClient implements AxiosHttpInstace {
   readonly baseURL: string = 'https://gateway.marvel.com/v1/public'
-  readonly params: Params = { apikey: '38e0464bf10c42601e8959017768c625'  }
+  readonly params: Params = { apikey: '38e0464bf10c42601e8959017768c625' }
 
   createAxios(): AxiosInstance {
     return axios.create({
       baseURL: this.baseURL,
-      params: this.params
+      params: this.params,
     })
   }
 }

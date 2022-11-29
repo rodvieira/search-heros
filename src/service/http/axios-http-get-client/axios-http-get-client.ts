@@ -1,5 +1,5 @@
-import { AxiosResponse } from 'axios';
-import { AxiosHttpClient } from '../axios-http-client/axios-http-client';
+import { AxiosResponse } from 'axios'
+import { AxiosHttpClient } from '../axios-http-client/axios-http-client'
 
 type Params = {
   url: string

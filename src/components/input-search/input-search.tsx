@@ -16,7 +16,7 @@ const InputSearch: React.FC<Props> = ({ custom = false, sendQuery }: Props) => {
       data-testid="input-search"
       type="text"
       placeholder="Procure por heróis"
-      className={`${Styles.inputSearch} ${!!custom ? Styles.custom : ''}`}
+      className={`${Styles.inputSearch} ${custom ? Styles.custom : ''}`}
       onKeyDown={handleKeyDown}
     />
   )

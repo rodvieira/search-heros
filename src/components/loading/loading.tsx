@@ -1,6 +1,5 @@
-import Styles from './loading-styles.scss'
-import { Spinner } from '@/components'
 import React from 'react'
+import { Spinner } from '@/components'
 
 const Loading: React.FC = () => {
   return (

@@ -43,7 +43,9 @@ const DetailsHero: React.FC<Props> = ({ character }: Props) => {
         </div>
       </div>
       <div className={Styles.characterThumbnail}>
-        <img src={`${character?.thumbnail.path}.${character?.thumbnail.extension}`} />
+        <img
+          src={`${character?.thumbnail.path}.${character?.thumbnail.extension}`}
+        />
       </div>
     </div>
   )

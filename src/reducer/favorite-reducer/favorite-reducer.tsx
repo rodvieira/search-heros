@@ -10,20 +10,23 @@ type FavoriteAction = {
 }
 
 export const initialState = {
-  favorites: []
+  favorites: [],
 }
 
-export const FavoriteReducer = (state: FavoriteState, action: FavoriteAction) => {
+export const FavoriteReducer = (
+  state: FavoriteState,
+  action: FavoriteAction
+) => {
   switch (action.type) {
     case 'ADD_FAVORITE':
       return {
         ...state,
-        favorites: [...state.favorites, action.data]
+        favorites: [...state.favorites, action.data],
       }
     case 'REMOVE_FAVORITE':
       return {
         ...state,
-        favorites: state.favorites.filter(item => item.id !== action.data.id)
+        favorites: state.favorites.filter((item) => item.id !== action.data.id),
       }
     default:
       throw state

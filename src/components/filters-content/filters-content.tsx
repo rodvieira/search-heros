@@ -12,7 +12,12 @@ type Props = {
   amount: number
 }
 
-const FiltersContent: React.FC<Props> = ({ orderList, queryList, favoriteList, amount }: Props) => {
+const FiltersContent: React.FC<Props> = ({
+  orderList,
+  queryList,
+  favoriteList,
+  amount,
+}: Props) => {
   const [favorite, setFavorite] = useState(false)
 
   const changeFavorite = () => {

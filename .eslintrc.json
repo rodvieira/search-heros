@@ -25,7 +25,8 @@
       "error",
       {
         "endOfLine": "auto",
-        "singleQuote": true
+        "singleQuote": true,
+        "semi": false
       }
     ]
   }
