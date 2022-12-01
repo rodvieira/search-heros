@@ -16,7 +16,8 @@ import { useFavorite } from '@/hooks/useFavorite'
 const Home: React.FC = () => {
   const navigate = useNavigate()
   const { handleSetFavorite, handleRemoveFavorite } = useFavorite()
-  const { characters, fetchCharacters, loading } = useFetchCharacters()
+  const { characters, fetchCharacters, handleOnlyFavorites, loading } =
+    useFetchCharacters()
 
   const orderList = (order: boolean) => {
     const url = `/characters?orderBy=${order ? 'name' : '-modified'}`
@@ -34,6 +35,8 @@ const Home: React.FC = () => {
       : handleRemoveFavorite(String(favoriteCharacter.id))
   }
 
+  const handleFavoritesList = () => handleOnlyFavorites()
+
   const pushToHero = (id: number) => navigate(`/hero/${id}`)
 
   return (
@@ -42,7 +45,7 @@ const Home: React.FC = () => {
       <FiltersContent
         orderList={orderList}
         queryList={(e: string) => filterQueryList(e)}
-        favoriteList={(e: boolean) => e}
+        favoriteList={handleFavoritesList}
         amount={characters.length}
       />
       {loading ? (

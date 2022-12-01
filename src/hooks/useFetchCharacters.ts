@@ -7,10 +7,12 @@ type FetchCharactersType = {
   loading: boolean
   characters: Character[]
   fetchCharacters: (url: string) => Promise<void>
+  handleOnlyFavorites: () => void
 }
 
 export const useFetchCharacters = (): FetchCharactersType => {
-  const [characters, setCharacters] = useState<Character[]>([])
+  const [charactersList, setCharactersList] = useState<Character[]>([])
+  const [onlyFavorites, setOnlyFavorites] = useState(false)
   const [loading, setLoading] = useState(false)
 
   const { favorite } = useFavorite()
@@ -20,7 +22,7 @@ export const useFetchCharacters = (): FetchCharactersType => {
       setLoading(true)
       const http = new AxiosHttpGetClient()
       const { data } = await http.get({ url })
-      setCharacters(data.data.results)
+      setCharactersList(data.data.results)
     } catch (error) {
       return error
     } finally {
@@ -28,18 +30,31 @@ export const useFetchCharacters = (): FetchCharactersType => {
     }
   }
 
-  useEffect(() => {
-    const favoriteCharacters = characters.map((character) => ({
+  const handleOnlyFavorites = () => setOnlyFavorites(!onlyFavorites)
+
+  const handleList = () =>
+    charactersList.map((character) => ({
       ...character,
       favorite: favorite.includes(String(character.id)),
     }))
 
-    setCharacters(favoriteCharacters)
+  const handleFavoritesList = () =>
+    charactersList.filter((character) =>
+      favorite.includes(String(character.id))
+    )
+
+  useEffect(() => {
+    setCharactersList(handleList())
   }, [favorite])
 
   useEffect(() => {
     fetchCharacters('/characters?orderBy=-modified')
   }, [])
 
-  return { characters, loading, fetchCharacters }
+  return {
+    characters: onlyFavorites ? handleFavoritesList() : charactersList,
+    loading,
+    fetchCharacters,
+    handleOnlyFavorites,
+  }
 }
