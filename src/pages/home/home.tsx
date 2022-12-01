@@ -1,10 +1,6 @@
-import React, { useReducer } from 'react'
+import React from 'react'
 import { useNavigate } from 'react-router-dom'
 
-import {
-  initialState,
-  FavoriteReducer,
-} from '@/reducer/favorite-reducer/favorite-reducer'
 import {
   Container,
   HeaderHome,
@@ -15,20 +11,12 @@ import {
 } from '@/components'
 import { Character } from '@/protocols/character'
 import { useFetchCharacters } from '@/hooks/useFetchCharacters'
+import { useFavorite } from '@/hooks/useFavorite'
 
 const Home: React.FC = () => {
   const navigate = useNavigate()
-  const [state, dispatch] = useReducer(FavoriteReducer, initialState)
+  const { handleSetFavorite, handleRemoveFavorite } = useFavorite()
   const { characters, fetchCharacters, loading } = useFetchCharacters()
-
-  // const setAttribute = (data: Character[], attr: string, value: any) => {
-  //   return data.map((item) => {
-  //     return {
-  //       ...item,
-  //       [attr]: value,
-  //     }
-  //   })
-  // }
 
   const orderList = (order: boolean) => {
     const url = `/characters?orderBy=${order ? 'name' : '-modified'}`
@@ -40,26 +28,10 @@ const Home: React.FC = () => {
     fetchCharacters(query ? url : '/characters?orderBy=-modified')
   }
 
-  const changeFavorite = (event: boolean, favoriteCharacter: Character) => {
-    const countfavorites = state.favorites.length < 5
-
-    const character = {
-      id: favoriteCharacter.id,
-      name: favoriteCharacter.name,
-      thumbnail: favoriteCharacter.thumbnail,
-      favorite: event && countfavorites,
-    }
-
-    const index = characters.findIndex(
-      (item) => item.id === favoriteCharacter.id
-    )
-    const newCharacters = [...characters]
-    newCharacters[index].favorite = event && countfavorites
-
-    dispatch({
-      type: event && countfavorites ? 'ADD_FAVORITE' : 'REMOVE_FAVORITE',
-      data: { ...character },
-    })
+  const handleFavorite = (favoriteCharacter: Character) => {
+    !favoriteCharacter.favorite
+      ? handleSetFavorite(String(favoriteCharacter.id))
+      : handleRemoveFavorite(String(favoriteCharacter.id))
   }
 
   const pushToHero = (id: number) => navigate(`/hero/${id}`)
@@ -81,9 +53,7 @@ const Home: React.FC = () => {
             <CardHero
               key={character.id}
               character={character}
-              favoriteEvent={(event: boolean) =>
-                changeFavorite(event, character)
-              }
+              favoriteEvent={() => handleFavorite(character)}
               onClick={() => pushToHero(character.id)}
             />
           ))}
