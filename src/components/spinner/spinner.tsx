@@ -3,7 +3,7 @@ import Styles from './spinner-styles.scss'
 
 type Props = React.HTMLAttributes<HTMLDivElement> & {
   isNegative?: boolean
-  className: string
+  className?: string
 }
 
 const Spinner: React.FC<Props> = ({ isNegative, ...props }: Props) => {
