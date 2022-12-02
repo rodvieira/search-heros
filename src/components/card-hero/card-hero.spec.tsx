@@ -2,7 +2,7 @@ import React from 'react'
 import { render, screen, fireEvent } from '@testing-library/react'
 
 import { CardHero } from '@/components'
-import { Character } from '@/protocols/character'
+import { Character } from '@/types/character'
 
 const characterMock: Character = {
   id: 555,

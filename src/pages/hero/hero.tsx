@@ -3,8 +3,8 @@ import { useParams } from 'react-router-dom'
 
 import { HeaderHero, Container, DetailsHero, ComicsHero } from '@/components'
 import { AxiosHttpGetClient } from '@/service/http/axios-http-get-client/axios-http-get-client'
-import { Character } from '@/protocols/character'
-import { Comics } from '@/protocols/comics'
+import { Character } from '@/types/character'
+import { Comics } from '@/types/comics'
 
 const Hero: React.FC = () => {
   const { id }: any = useParams()

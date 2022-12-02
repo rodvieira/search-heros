@@ -1,4 +1,4 @@
-import { Character } from '@/protocols/character'
+import { Character } from '@/types/character'
 import { AxiosHttpGetClient } from '@/service/http/axios-http-get-client/axios-http-get-client'
 import { useEffect, useState } from 'react'
 import { useFavorite } from './useFavorite'

@@ -9,7 +9,7 @@ import {
   CardHero,
   Loading,
 } from '@/components'
-import { Character } from '@/protocols/character'
+import { Character } from '@/types/character'
 import { useFetchCharacters } from '@/hooks/useFetchCharacters'
 import { useFavorite } from '@/hooks/useFavorite'
 

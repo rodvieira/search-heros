@@ -2,7 +2,7 @@ import React from 'react'
 
 import { Favorite } from '@/components'
 import Styles from './card-hero-styles.scss'
-import { Character } from '@/protocols/character'
+import { Character } from '@/types/character'
 
 type Props = {
   character: Character

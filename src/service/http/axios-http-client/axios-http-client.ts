@@ -1,5 +1,5 @@
 import axios, { AxiosInstance } from 'axios'
-import { AxiosHttpInstace, Params } from '../protocols/axios-http-instance'
+import { AxiosHttpInstace, Params } from '../types/axios-http-instance'
 
 export class AxiosHttpClient implements AxiosHttpInstace {
   readonly baseURL: string = 'https://gateway.marvel.com/v1/public'
