@@ -12,8 +12,19 @@ const comicsMock: Comics = {
   },
 }
 
-const makeSut = () => {
-  return render(<ComicsHero characterComics={[comicsMock]} />)
+const listComicsMock = [
+  { ...comicsMock },
+  {
+    title: 'Ramdon title 2',
+    thumbnail: {
+      path: 'path2',
+      extension: 'jpg',
+    },
+  },
+]
+
+const makeSut = (comics: Comics[] = [comicsMock]) => {
+  return render(<ComicsHero characterComics={comics} />)
 }
 
 describe('ComicsHero Component', () => {
@@ -27,9 +38,16 @@ describe('ComicsHero Component', () => {
     expect(comicsWrap).toHaveLength(1)
   })
 
+  test('Should render list ComicsHero', () => {
+    makeSut(listComicsMock)
+
+    const comicsWrap = screen.getAllByTestId('comics-wrap')
+
+    expect(comicsWrap).toHaveLength(2)
+  })
+
   test('Should render ComicsHero with attributes characterComics', () => {
     makeSut()
-
     const imageMock = `${comicsMock.thumbnail.path}.${comicsMock.thumbnail.extension}`
 
     const comicsImage = screen.getByRole('img')
