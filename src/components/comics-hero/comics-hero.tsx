@@ -18,10 +18,10 @@ const ComicsHero: React.FC<Props> = ({ characterComics }: Props) => {
           data-testid="comics-wrap"
         >
           <img
-            src={`${item.thumbnail?.path}.${item.thumbnail?.extension}`}
+            src={`${item.thumbnail.path}.${item.thumbnail.extension}`}
             alt={item.title}
           />
-          <span data-testid="comics-title">{item?.title}</span>
+          <span data-testid="comics-title">{item.title}</span>
         </div>
       ))}
     </div>
