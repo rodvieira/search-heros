@@ -1,49 +1,14 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { useParams } from 'react-router-dom'
 
 import { HeaderHero, Container, DetailsHero, ComicsHero } from '@/components'
-import { AxiosHttpGetClient } from '@/service/http/axios-http-get-client/axios-http-get-client'
-import { Character } from '@/types/character'
-import { Comics } from '@/types/comics'
+import { useFetchCharacter } from '@/hooks/useFetchCharacter'
+import { useFetchCharacterComics } from '@/hooks/useFetchCharacterComics'
 
 const Hero: React.FC = () => {
-  const { id }: any = useParams()
-
-  const [character, setCharacter] = useState<Character>()
-  const [characterComics, setCharacterComics] = useState<Comics[]>([])
-
-  const fetchCharacter = async () => {
-    const req = new AxiosHttpGetClient()
-    const res = await req.get({ url: `/characters/${id}` })
-    const res2 = await req.get({
-      url: `/characters/${id}/comics?orderBy=onsaleDate&limit=10`,
-    })
-
-    const dataCharacter = res.data.data.results[0]
-    const dataCharacterComics = res2.data.data.results
-
-    setCharacter({
-      id: dataCharacter.id,
-      name: dataCharacter.name,
-      description: dataCharacter.description,
-      comicsCount: dataCharacter.comics.available,
-      seriesCount: dataCharacter.series.available,
-      thumbnail: dataCharacter.thumbnail,
-    })
-
-    const newCharacterComics = dataCharacterComics.map((item) => {
-      return {
-        title: item.title,
-        thumbnail: item.thumbnail,
-      }
-    })
-
-    setCharacterComics(newCharacterComics)
-  }
-
-  useEffect(() => {
-    fetchCharacter()
-  }, [])
+  const { id } = useParams()
+  const { character } = useFetchCharacter(id)
+  const { characterComics } = useFetchCharacterComics(id)
 
   return (
     <div style={{ background: '#e7f6e7', flex: '1 0 auto' }}>
