@@ -1,14 +1,15 @@
-import { AxiosResponse } from 'axios'
+import { AxiosRequestConfig, AxiosResponse } from 'axios'
 import { AxiosHttpClient } from '../axios-http-client/axios-http-client'
 
-type Params = {
-  url: string
-}
-
 export class AxiosHttpGetClient implements AxiosHttpGetClient {
-  async get(params: Params): Promise<AxiosResponse<any>> {
+  async get<T>(
+    url: string,
+    params: AxiosRequestConfig
+  ): Promise<AxiosResponse<T>> {
     const instaceAxios = new AxiosHttpClient()
 
-    return await instaceAxios.createAxios().get(params.url)
+    return await instaceAxios.createAxios().get(url, {
+      params: { ...params },
+    })
   }
 }

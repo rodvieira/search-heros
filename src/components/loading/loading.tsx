@@ -3,7 +3,10 @@ import { Spinner } from '@/components'
 
 const Loading: React.FC = () => {
   return (
-    <div style={{ display: 'flex', justifyContent: 'center', margin: '40px' }}>
+    <div
+      data-testid="loading"
+      style={{ display: 'flex', justifyContent: 'center', margin: '40px' }}
+    >
       <Spinner isNegative />
     </div>
   )

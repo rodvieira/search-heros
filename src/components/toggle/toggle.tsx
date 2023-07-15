@@ -17,7 +17,7 @@ const Toggle: React.FC<Props> = ({ onClick }: Props) => {
   }
 
   return (
-    <a onClick={() => handleClick(!status)}>
+    <a onClick={() => handleClick(!status)} data-testid="toggle">
       <img
         src={status ? IconToggleOn : IconToggleOff}
         className={Styles.toggle}

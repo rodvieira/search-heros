@@ -20,13 +20,13 @@ const Home: React.FC = () => {
     useFetchCharacters()
 
   const orderList = (order: boolean) => {
-    const url = `/characters?orderBy=${order ? 'name' : '-modified'}`
-    fetchCharacters(url)
+    fetchCharacters({ orderBy: order && 'name' })
   }
 
   const filterQueryList = (query: string) => {
-    const url = `/characters?nameStartsWith=${query}`
-    fetchCharacters(query ? url : '/characters?orderBy=-modified')
+    if (query) {
+      fetchCharacters({ nameStartsWith: query })
+    }
   }
 
   const handleFavorite = (favoriteCharacter: Character) => {

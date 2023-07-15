@@ -1,12 +1,12 @@
-import { Character } from '@/types/character'
-import { AxiosHttpGetClient } from '@/service/http/axios-http-get-client/axios-http-get-client'
 import { useEffect, useState } from 'react'
+import { Character } from '@/types/character'
 import { useFavorite } from './useFavorite'
+import { CharacterParams, getCharacters } from '@/service/api/characters'
 
 type FetchCharactersType = {
   loading: boolean
   characters: Character[]
-  fetchCharacters: (url: string) => Promise<void>
+  fetchCharacters: (params?: CharacterParams) => void
   handleOnlyFavorites: () => void
 }
 
@@ -17,11 +17,10 @@ export const useFetchCharacters = (): FetchCharactersType => {
 
   const { favorite } = useFavorite()
 
-  const fetchCharacters = async (url: string) => {
+  const fetchCharacters = async (params?: CharacterParams) => {
     try {
       setLoading(true)
-      const http = new AxiosHttpGetClient()
-      const { data } = await http.get({ url })
+      const { data } = await getCharacters({ ...params })
       setCharactersList(data.data.results)
     } catch (error) {
       return error
@@ -48,7 +47,7 @@ export const useFetchCharacters = (): FetchCharactersType => {
   }, [favorite])
 
   useEffect(() => {
-    fetchCharacters('/characters?orderBy=-modified')
+    fetchCharacters()
   }, [])
 
   return {
