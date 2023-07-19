@@ -20,7 +20,7 @@ export type CharacterRequest = Character & {
 
 export const getCharacters = async (params?: CharacterParams) => {
   const http = new AxiosHttpGetClient()
-  const existingParams = Object.keys(params).length
+  const existingParams = Object.keys(params || {}).length
     ? { params: { ...params } }
     : null
   return await http.get<DataReponse<Character[]>>('/characters', existingParams)
