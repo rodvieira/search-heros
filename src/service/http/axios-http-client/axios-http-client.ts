@@ -12,3 +12,5 @@ export class AxiosHttpClient implements AxiosHttpInstace {
     })
   }
 }
+
+export const instaceAxios = new AxiosHttpClient().createAxios()
