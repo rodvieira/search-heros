@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react'
 import { Character } from '@/types/character'
 import { useFavorite } from './useFavorite'
-import { CharacterParams, getCharacters } from '@/service/api/characters'
+import { CharacterParams } from '@/service/api/characters'
+import { instaceAxios } from '@/service/http/axios-http-client/axios-http-client'
 
 type FetchCharactersType = {
   loading: boolean
@@ -20,7 +21,7 @@ export const useFetchCharacters = (): FetchCharactersType => {
   const fetchCharacters = async (params?: CharacterParams) => {
     try {
       setLoading(true)
-      const { data } = await getCharacters({ ...params })
+      const { data } = await instaceAxios.get('/characters')
       setCharactersList(data.data.results)
     } catch (error) {
       return error
