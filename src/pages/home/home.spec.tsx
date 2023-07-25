@@ -130,6 +130,9 @@ describe('Home Page', () => {
     expect(handleRemoveFavoriteMock).not.toHaveBeenCalled()
     expect(handleSetFavoriteMock).toHaveBeenCalled()
     expect(handleSetFavoriteMock).toHaveBeenCalledWith(listCharactersMock[1])
+    expect(handleSetFavoriteCharacterMock).toHaveBeenCalledWith(
+      listCharactersMock[1].id
+    )
   })
 
   test('Should remove hero in favorites list when click in favorite character', async () => {
@@ -147,6 +150,9 @@ describe('Home Page', () => {
     expect(handleSetFavoriteMock).not.toHaveBeenCalled()
     expect(handleRemoveFavoriteMock).toHaveBeenCalled()
     expect(handleRemoveFavoriteMock).toHaveBeenCalledWith(listCharactersMock[0])
+    expect(handleSetFavoriteCharacterMock).toHaveBeenCalledWith(
+      listCharactersMock[0].id
+    )
   })
 
   test('Should navigate to a hero details page', async () => {
