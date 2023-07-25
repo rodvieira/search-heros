@@ -51,14 +51,14 @@ describe('CardHero Component', () => {
 
   test('Should call favoriteEvent function when click in favorite', () => {
     makeSut()
-    const favoriteWrap = screen.getByTestId('favorite-wrap')
+    const favoriteWrap = screen.getByTestId('toggle-favorite')
     fireEvent.click(favoriteWrap)
     expect(favoriteEventMock).toHaveBeenCalledTimes(1)
   })
 
   test('Should call favoriteEvent function with correct value', () => {
     makeSut()
-    const favoriteWrap = screen.getByTestId('favorite-wrap')
+    const favoriteWrap = screen.getByTestId('toggle-favorite')
     fireEvent.click(favoriteWrap)
     expect(favoriteEventMock).toHaveBeenCalledWith(!characterMock.favorite)
   })
