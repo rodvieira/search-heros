@@ -2,7 +2,6 @@ import React from 'react'
 import { act, fireEvent, render, screen } from '@testing-library/react'
 
 import { Home } from '@/pages'
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
 
 import { listCharactersMock } from '@/test/mock-adapter'
 import { FavoriteContext } from '@/contexts/favorite-context'
@@ -12,6 +11,14 @@ import userEvent from '@testing-library/user-event'
 
 const fetchCharactersMock = jest.fn()
 const handleSetFavoriteCharacterMock = jest.fn()
+const handleSetFavoriteMock = jest.fn()
+const handleRemoveFavoriteMock = jest.fn()
+const useNavigateMock = jest.fn()
+
+jest.mock('react-router-dom', () => ({
+  ...jest.requireActual('react-router-dom'),
+  useNavigate: () => useNavigateMock,
+}))
 
 const useFetchCharactersSpy = jest.spyOn(
   useFetchCharacters,
@@ -23,15 +30,11 @@ const makeSut = () => {
     <FavoriteContext.Provider
       value={{
         favorites: [{ ...listCharactersMock[0] }],
-        handleSetFavorite: jest.fn(),
-        handleRemoveFavorite: jest.fn(),
+        handleSetFavorite: handleSetFavoriteMock,
+        handleRemoveFavorite: handleRemoveFavoriteMock,
       }}
     >
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Home />} />
-        </Routes>
-      </BrowserRouter>
+      <Home />
     </FavoriteContext.Provider>
   )
 }
@@ -110,5 +113,57 @@ describe('Home Page', () => {
     })
     expect(screen.queryByText('A Bomb')).toBeVisible()
     expect(screen.queryByText('AIM')).toBeNull()
+  })
+
+  test('Should add hero in favorites list when click in favorite character', async () => {
+    useFetchCharactersSpy.mockReturnValueOnce({
+      loading: false,
+      characters: listCharactersMock,
+      fetchCharacters: fetchCharactersMock,
+      handleSetFavoriteCharacter: handleSetFavoriteCharacterMock,
+    })
+    makeSut()
+    const toggleFavorite = screen.getAllByTestId('toggle-favorite')[1]
+    await act(() => {
+      fireEvent.click(toggleFavorite)
+    })
+    expect(handleRemoveFavoriteMock).not.toHaveBeenCalled()
+    expect(handleSetFavoriteMock).toHaveBeenCalled()
+    expect(handleSetFavoriteMock).toHaveBeenCalledWith(listCharactersMock[1])
+  })
+
+  test('Should remove hero in favorites list when click in favorite character', async () => {
+    useFetchCharactersSpy.mockReturnValueOnce({
+      loading: false,
+      characters: listCharactersMock,
+      fetchCharacters: fetchCharactersMock,
+      handleSetFavoriteCharacter: handleSetFavoriteCharacterMock,
+    })
+    makeSut()
+    const toggleFavorite = screen.getAllByTestId('toggle-favorite')[0]
+    await act(() => {
+      fireEvent.click(toggleFavorite)
+    })
+    expect(handleSetFavoriteMock).not.toHaveBeenCalled()
+    expect(handleRemoveFavoriteMock).toHaveBeenCalled()
+    expect(handleRemoveFavoriteMock).toHaveBeenCalledWith(listCharactersMock[0])
+  })
+
+  test('Should navigate to a hero details page', async () => {
+    useFetchCharactersSpy.mockReturnValueOnce({
+      loading: false,
+      characters: listCharactersMock,
+      fetchCharacters: fetchCharactersMock,
+      handleSetFavoriteCharacter: handleSetFavoriteCharacterMock,
+    })
+    makeSut()
+    const characterDetails = screen.getAllByTestId('character-link')[0]
+    await act(() => {
+      fireEvent.click(characterDetails)
+    })
+    expect(useNavigateMock).toHaveBeenCalled()
+    expect(useNavigateMock).toHaveBeenCalledWith(
+      `/hero/${listCharactersMock[0].id}`
+    )
   })
 })
