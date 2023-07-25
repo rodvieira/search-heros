@@ -1,9 +1,10 @@
 import React, { createContext, useState } from 'react'
+import { Character } from '@/types/character'
 
 type FavoriteContextType = {
-  favorite: string[]
-  handleSetFavorite: (id: string) => void
-  handleRemoveFavorite: (id: string) => void
+  favorites: Character[]
+  handleSetFavorite: (character: Character) => void
+  handleRemoveFavorite: (character: Character) => void
 }
 
 type Props = {
@@ -11,26 +12,29 @@ type Props = {
 }
 
 export const FavoriteContext = createContext<FavoriteContextType>({
-  favorite: [],
-  handleSetFavorite: (e) => e,
-  handleRemoveFavorite: (e) => e,
+  favorites: [],
+  handleSetFavorite: (id) => id,
+  handleRemoveFavorite: (id) => id,
 })
 
 export const FavoriteProvider: React.FC<Props> = ({ children }) => {
-  const [favorite, setFavorite] = useState<string[]>([])
+  const [favorites, setFavorites] = useState<Character[]>([])
 
-  const handleSetFavorite = (id: string) => {
-    if (favorite.length < 5) setFavorite([...favorite, id])
+  const handleSetFavorite = (character: Character) => {
+    if (favorites.length < 5)
+      setFavorites([...favorites, { ...character, favorite: true }])
   }
 
-  const handleRemoveFavorite = (id: string) => {
-    setFavorite([...favorite.filter((idFavorite) => idFavorite !== id)])
+  const handleRemoveFavorite = (character: Character) => {
+    setFavorites([
+      ...favorites.filter((idFavorite) => idFavorite !== character),
+    ])
   }
 
   return (
     <FavoriteContext.Provider
       value={{
-        favorite,
+        favorites,
         handleSetFavorite,
         handleRemoveFavorite,
       }}

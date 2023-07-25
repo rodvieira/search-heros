@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 import {
@@ -14,9 +14,11 @@ import { useFetchCharacters } from '@/hooks/useFetchCharacters'
 import { useFavorite } from '@/hooks/useFavorite'
 
 const Home: React.FC = () => {
+  const [justFavorites, setJustFavorites] = useState(false)
   const navigate = useNavigate()
-  const { handleSetFavorite, handleRemoveFavorite } = useFavorite()
-  const { characters, fetchCharacters, handleOnlyFavorites, loading } =
+
+  const { handleSetFavorite, handleRemoveFavorite, favorites } = useFavorite()
+  const { characters, fetchCharacters, loading, handleSetFavoriteCharacter } =
     useFetchCharacters()
 
   const orderList = (order: boolean) => {
@@ -31,11 +33,11 @@ const Home: React.FC = () => {
 
   const handleFavorite = (favoriteCharacter: Character) => {
     !favoriteCharacter.favorite
-      ? handleSetFavorite(String(favoriteCharacter.id))
-      : handleRemoveFavorite(String(favoriteCharacter.id))
-  }
+      ? handleSetFavorite(favoriteCharacter)
+      : handleRemoveFavorite(favoriteCharacter)
 
-  const handleFavoritesList = () => handleOnlyFavorites()
+    handleSetFavoriteCharacter(favoriteCharacter.id)
+  }
 
   const pushToHero = (id: number) => navigate(`/hero/${id}`)
 
@@ -45,21 +47,30 @@ const Home: React.FC = () => {
       <FiltersContent
         orderList={orderList}
         queryList={(e: string) => filterQueryList(e)}
-        favoriteList={handleFavoritesList}
+        favoriteList={() => setJustFavorites(!justFavorites)}
         amount={characters.length}
       />
       {loading ? (
         <Loading />
       ) : (
         <FlexContent>
-          {characters.map((character) => (
-            <CardHero
-              key={character.id}
-              character={character}
-              favoriteEvent={() => handleFavorite(character)}
-              onClick={() => pushToHero(character.id)}
-            />
-          ))}
+          {justFavorites
+            ? favorites.map((character) => (
+                <CardHero
+                  key={character.id}
+                  character={character}
+                  favoriteEvent={() => handleFavorite(character)}
+                  onClick={() => pushToHero(character.id)}
+                />
+              ))
+            : characters.map((character) => (
+                <CardHero
+                  key={character.id}
+                  character={character}
+                  favoriteEvent={() => handleFavorite(character)}
+                  onClick={() => pushToHero(character.id)}
+                />
+              ))}
         </FlexContent>
       )}
     </Container>

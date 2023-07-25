@@ -1,22 +1,18 @@
 import { useEffect, useState } from 'react'
 import { Character } from '@/types/character'
-import { useFavorite } from './useFavorite'
 import { CharacterParams } from '@/service/api/characters'
 import { instaceAxios } from '@/service/http/axios-http-client/axios-http-client'
 
 type FetchCharactersType = {
   loading: boolean
   characters: Character[]
+  handleSetFavoriteCharacter: (characterId: number) => void
   fetchCharacters: (params?: CharacterParams) => void
-  handleOnlyFavorites: () => void
 }
 
 export const useFetchCharacters = (): FetchCharactersType => {
   const [charactersList, setCharactersList] = useState<Character[]>([])
-  const [onlyFavorites, setOnlyFavorites] = useState(false)
   const [loading, setLoading] = useState(false)
-
-  const { favorite } = useFavorite()
 
   const fetchCharacters = async (params?: CharacterParams) => {
     try {
@@ -30,31 +26,27 @@ export const useFetchCharacters = (): FetchCharactersType => {
     }
   }
 
-  const handleOnlyFavorites = () => setOnlyFavorites(!onlyFavorites)
+  const handleSetFavoriteCharacter = (characterId: number) => {
+    setCharactersList((oldCharacter) => {
+      return oldCharacter.map((character) => {
+        if (character.id !== characterId) return character
 
-  const handleList = () =>
-    charactersList.map((character) => ({
-      ...character,
-      favorite: favorite.includes(String(character.id)),
-    }))
-
-  const handleFavoritesList = () =>
-    charactersList.filter((character) =>
-      favorite.includes(String(character.id))
-    )
-
-  useEffect(() => {
-    setCharactersList(handleList())
-  }, [favorite])
+        return {
+          ...character,
+          favorite: !character.favorite,
+        }
+      })
+    })
+  }
 
   useEffect(() => {
     fetchCharacters()
   }, [])
 
   return {
-    characters: onlyFavorites ? handleFavoritesList() : charactersList,
+    characters: charactersList,
+    handleSetFavoriteCharacter,
     loading,
     fetchCharacters,
-    handleOnlyFavorites,
   }
 }

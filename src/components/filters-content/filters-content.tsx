@@ -8,7 +8,7 @@ import Styles from './filters-content-styles.scss'
 type Props = {
   orderList: (order: boolean) => void
   queryList: (query: string) => void
-  favoriteList: (favorite: boolean) => void
+  favoriteList: () => void
   amount: number
 }
 
@@ -21,7 +21,7 @@ const FiltersContent: React.FC<Props> = ({
   const [favorite, setFavorite] = useState(false)
 
   const changeFavorite = () => {
-    favoriteList(!favorite)
+    favoriteList()
     setFavorite(!favorite)
   }
 
@@ -38,7 +38,11 @@ const FiltersContent: React.FC<Props> = ({
             <span>Ordernar por nome - A/Z</span>
             <Toggle onClick={(e: boolean) => orderList(e)} />
           </div>
-          <a className={Styles.favorites} onClick={() => changeFavorite()}>
+          <a
+            data-testid="just-favorites"
+            className={Styles.favorites}
+            onClick={() => changeFavorite()}
+          >
             <img src={favorite ? IconFavoriteOn : IconFavoriteOff} />
             <span>Somente favoritos</span>
           </a>
