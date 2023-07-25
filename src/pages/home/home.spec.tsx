@@ -1,13 +1,12 @@
 import React from 'react'
 import { act, fireEvent, render, screen } from '@testing-library/react'
+import userEvent from '@testing-library/user-event'
 
 import { Home } from '@/pages'
 
-import { listCharactersMock } from '@/test/mock-adapter'
+import { listCharactersMock } from '@/test/mock-characters'
 import { FavoriteContext } from '@/contexts/favorite-context'
 import * as useFetchCharacters from '@/hooks/useFetchCharacters'
-
-import userEvent from '@testing-library/user-event'
 
 const fetchCharactersMock = jest.fn()
 const handleSetFavoriteCharacterMock = jest.fn()
@@ -29,7 +28,7 @@ const makeSut = () => {
   return render(
     <FavoriteContext.Provider
       value={{
-        favorites: [{ ...listCharactersMock[0] }],
+        favorites: [listCharactersMock[0]],
         handleSetFavorite: handleSetFavoriteMock,
         handleRemoveFavorite: handleRemoveFavoriteMock,
       }}

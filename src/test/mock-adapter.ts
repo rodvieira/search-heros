@@ -1,31 +1,14 @@
-import { instaceAxios } from '@/service/http/axios-http-client/axios-http-client'
-import { Character } from '@/types/character'
 import MockAdapter from 'axios-mock-adapter'
+
+import { instaceAxios } from '@/service/http/axios-http-client/axios-http-client'
+
+import { listCharactersMock } from './mock-characters'
 
 const mock = new MockAdapter(instaceAxios)
 
 const succesResponse = {
   data: {
-    results: [
-      {
-        id: 10,
-        name: 'Hulk',
-        description: 'This is a hero Hulk',
-        comicsCount: 100,
-        seriesCount: 50,
-        thumbnail: '',
-        favorite: true,
-      },
-      {
-        id: 20,
-        name: 'Wolman Hulk',
-        description: 'This is a hero Wolman Hulk',
-        comicsCount: 50,
-        seriesCount: 25,
-        thumbnail: '',
-        favorite: false,
-      },
-    ],
+    results: listCharactersMock,
   },
 }
 
@@ -35,34 +18,7 @@ export const mockGetCharacters = (status: 200 | 500) => {
   return mock.onGet('/characters').reply(status, response)
 }
 
-export const listCharactersMock: Character[] = [
-  {
-    id: 10,
-    name: 'A Bomb',
-    description: 'This is a hero A Bomb',
-    comicsCount: 100,
-    seriesCount: 50,
-    thumbnail: {
-      path: '',
-      extension: '',
-    },
-    favorite: true,
-  },
-  {
-    id: 20,
-    name: 'AIM',
-    description: 'This is a hero AIM',
-    comicsCount: 50,
-    seriesCount: 25,
-    thumbnail: {
-      path: '',
-      extension: '',
-    },
-    favorite: false,
-  },
-]
-
-export const succesResponseOrdenerByName = {
+const succesResponseOrdenerByName = {
   data: {
     results: listCharactersMock,
   },
