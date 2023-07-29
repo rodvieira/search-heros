@@ -4,9 +4,10 @@ import userEvent from '@testing-library/user-event'
 
 import { Home } from '@/pages'
 
-import { listCharactersMock } from '@/test/mock-characters'
 import { FavoriteContext } from '@/contexts/favorite-context'
+import { listCharactersMock } from '@/test/mock-adapter'
 import * as useFetchCharacters from '@/hooks/useFetchCharacters'
+import { Character } from '@/types/character'
 
 const fetchCharactersMock = jest.fn()
 const handleSetFavoriteCharacterMock = jest.fn()
@@ -24,11 +25,11 @@ const useFetchCharactersSpy = jest.spyOn(
   'useFetchCharacters'
 )
 
-const makeSut = () => {
+const makeSut = (characters: Character[] = []) => {
   return render(
     <FavoriteContext.Provider
       value={{
-        favorites: [listCharactersMock[0]],
+        favorites: characters,
         handleSetFavorite: handleSetFavoriteMock,
         handleRemoveFavorite: handleRemoveFavoriteMock,
       }}
@@ -105,7 +106,7 @@ describe('Home Page', () => {
   })
 
   test('Should show just favorites when click in favorites', async () => {
-    makeSut()
+    makeSut([listCharactersMock[0]])
     const justFavorites = screen.getByTestId('just-favorites')
     await act(() => {
       fireEvent.click(justFavorites)

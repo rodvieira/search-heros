@@ -1,10 +1,36 @@
 import MockAdapter from 'axios-mock-adapter'
 
 import { instaceAxios } from '@/service/http/axios-http-client/axios-http-client'
-
-import { listCharactersMock } from './mock-characters'
+import { Character } from '@/types/character'
 
 const mock = new MockAdapter(instaceAxios)
+
+export const listCharactersMock: Character[] = [
+  {
+    id: 10,
+    name: 'A Bomb',
+    description: 'This is a hero A Bomb',
+    comicsCount: 100,
+    seriesCount: 50,
+    thumbnail: {
+      path: '',
+      extension: '',
+    },
+    favorite: true,
+  },
+  {
+    id: 20,
+    name: 'AIM',
+    description: 'This is a hero AIM',
+    comicsCount: 50,
+    seriesCount: 25,
+    thumbnail: {
+      path: '',
+      extension: '',
+    },
+    favorite: false,
+  },
+]
 
 const succesResponse = {
   data: {
