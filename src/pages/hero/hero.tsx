@@ -2,7 +2,7 @@ import React from 'react'
 import { useParams } from 'react-router-dom'
 
 import { HeaderHero, Container, DetailsHero, ComicsHero } from '@/components'
-import { useFetchCharacter } from '@/hooks/useFetchCharacter'
+import { useFetchCharacter } from '@/hooks/useFetchCharacter/useFetchCharacter'
 import { useFetchCharacterComics } from '@/hooks/useFetchCharacterComics'
 
 const Hero: React.FC = () => {

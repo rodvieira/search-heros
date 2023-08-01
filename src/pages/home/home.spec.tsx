@@ -6,7 +6,7 @@ import { Home } from '@/pages'
 
 import { FavoriteContext } from '@/contexts/favorite-context'
 import { listCharactersMock } from '@/test/mock-adapter'
-import * as useFetchCharacters from '@/hooks/useFetchCharacters'
+import * as useFetchCharacters from '@/hooks/useFetchCharacters/useFetchCharacters'
 import { Character } from '@/types/character'
 
 const fetchCharactersMock = jest.fn()

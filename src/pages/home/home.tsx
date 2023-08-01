@@ -10,7 +10,7 @@ import {
   Loading,
 } from '@/components'
 import { Character } from '@/types/character'
-import { useFetchCharacters } from '@/hooks/useFetchCharacters'
+import { useFetchCharacters } from '@/hooks/useFetchCharacters/useFetchCharacters'
 import { useFavorite } from '@/hooks/useFavorite'
 
 const Home: React.FC = () => {

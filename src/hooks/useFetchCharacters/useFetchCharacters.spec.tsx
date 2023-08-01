@@ -1,6 +1,6 @@
 import { renderHook, act } from '@testing-library/react'
 
-import { useFetchCharacters } from '@/hooks/useFetchCharacters'
+import { useFetchCharacters } from '@/hooks/useFetchCharacters/useFetchCharacters'
 import { mockGetCharacters } from '@/test/mock-adapter'
 
 describe('useFetchCharacters', () => {
