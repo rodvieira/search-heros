@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom'
 
 import { HeaderHero, Container, DetailsHero, ComicsHero } from '@/components'
 import { useFetchCharacter } from '@/hooks/useFetchCharacter/useFetchCharacter'
-import { useFetchCharacterComics } from '@/hooks/useFetchCharacterComics'
+import { useFetchCharacterComics } from '@/hooks/useFetchCharacterComics/useFetchCharacterComics'
 
 const Hero: React.FC = () => {
   const { id } = useParams()

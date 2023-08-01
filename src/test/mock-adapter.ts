@@ -76,3 +76,26 @@ export const mockGetCharacter = (id: number, status: statusCode) => {
     },
   })
 }
+
+export const mockGetCharacterComics = (id: number, status: statusCode) => {
+  return mock.onGet(`/characters/${id}/comics`).reply(status, {
+    data: {
+      results: [
+        {
+          title: 'Avengers Unlimited',
+          thumbnail: {
+            path: 'avengers-unlimited',
+            extension: 'jpg',
+          },
+        },
+        {
+          title: 'X-Men Unlimited Infinity Comic',
+          thumbnail: {
+            path: 'x-men-unlimited',
+            extension: 'jpg',
+          },
+        },
+      ],
+    },
+  })
+}
