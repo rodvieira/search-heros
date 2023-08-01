@@ -3,6 +3,8 @@ import MockAdapter from 'axios-mock-adapter'
 import { instaceAxios } from '@/service/http/axios-http-client/axios-http-client'
 import { Character } from '@/types/character'
 
+type statusCode = 200 | 500
+
 const mock = new MockAdapter(instaceAxios)
 
 export const listCharactersMock: Character[] = [
@@ -38,7 +40,7 @@ const succesResponse = {
   },
 }
 
-export const mockGetCharacters = (status: 200 | 500) => {
+export const mockGetCharacters = (status: statusCode) => {
   const response = status === 200 ? succesResponse : null
 
   return mock.onGet('/characters').reply(status, response)
@@ -56,9 +58,9 @@ export const mockGetCharactersOrdenedByName = (params: { orderBy: string }) => {
     .reply(200, succesResponseOrdenerByName)
 }
 
-export const mockGetCharacter = (id: number) => {
+export const mockGetCharacter = (id: number, status: statusCode) => {
   const characterMock = listCharactersMock[0]
-  return mock.onGet(`/characters/${id}`).reply(200, {
+  return mock.onGet(`/characters/${id}`).reply(status, {
     data: {
       results: [
         {
