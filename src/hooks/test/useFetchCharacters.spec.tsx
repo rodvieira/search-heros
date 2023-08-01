@@ -35,4 +35,44 @@ describe('useFetchCharacters', () => {
     expect(result.current.characters).toHaveLength(0)
     expect(result.current.loading).toBeFalsy()
   })
+
+  test('Should add favorite user in a list', async () => {
+    mockGetCharacters(200)
+
+    const { result } = renderHook(() => useFetchCharacters())
+
+    await act(() => {
+      result.current.characters
+    })
+
+    await act(() => {
+      result.current.handleSetFavoriteCharacter(result.current.characters[1].id)
+    })
+
+    const favoritesCharacter = result.current.characters.filter(
+      (character) => character.favorite
+    )
+
+    expect(favoritesCharacter.length).toBe(2)
+  })
+
+  test('Should remove favorite user in a list', async () => {
+    mockGetCharacters(200)
+
+    const { result } = renderHook(() => useFetchCharacters())
+
+    await act(() => {
+      result.current.characters
+    })
+
+    await act(() => {
+      result.current.handleSetFavoriteCharacter(result.current.characters[0].id)
+    })
+
+    const favoritesCharacter = result.current.characters.filter(
+      (character) => character.favorite
+    )
+
+    expect(favoritesCharacter.length).toBe(0)
+  })
 })
