@@ -55,3 +55,22 @@ export const mockGetCharactersOrdenedByName = (params: { orderBy: string }) => {
     .onGet('/characters', { params })
     .reply(200, succesResponseOrdenerByName)
 }
+
+export const mockGetCharacter = (id: number) => {
+  const characterMock = listCharactersMock[0]
+  return mock.onGet(`/characters/${id}`).reply(200, {
+    data: {
+      results: [
+        {
+          ...characterMock,
+          comics: {
+            available: characterMock.comicsCount,
+          },
+          series: {
+            available: characterMock.seriesCount,
+          },
+        },
+      ],
+    },
+  })
+}
