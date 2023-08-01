@@ -17,7 +17,7 @@ export const useFetchCharacters = (): FetchCharactersType => {
   const fetchCharacters = async (params?: CharacterParams) => {
     try {
       setLoading(true)
-      const { data } = await instaceAxios.get('/characters')
+      const { data } = await instaceAxios.get('/characters', { params })
       setCharactersList(data.data.results)
     } catch (error) {
       return error
