@@ -11,7 +11,7 @@ import {
 } from '@/components'
 import { Character } from '@/types/character'
 import { useFetchCharacters } from '@/hooks/useFetchCharacters/useFetchCharacters'
-import { useFavorite } from '@/hooks/useFavorite'
+import { useFavorite } from '@/hooks/useFavorite/useFavorite'
 
 const Home: React.FC = () => {
   const [justFavorites, setJustFavorites] = useState(false)
