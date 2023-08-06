@@ -20,17 +20,21 @@ const DetailsHero: React.FC<Props> = ({ character }: Props) => {
           <h1>{character?.name}</h1>
           <img src={IconFavorite} />
         </div>
-        <p>{character?.description}</p>
+        <p data-testid="character-description">{character?.description}</p>
         <div className={Styles.detailsHero}>
           <div>
             <p>Quadrinhos</p>
             <img src={IconComics} alt="" />
-            <span>{character?.comicsCount}</span>
+            <span data-testid="character-comics-count">
+              {character?.comicsCount}
+            </span>
           </div>
           <div>
             <p>Filmes</p>
             <img src={IconTrailer} alt="" />
-            <span>{character?.seriesCount}</span>
+            <span data-testid="character-series-count">
+              {character?.seriesCount}
+            </span>
           </div>
         </div>
         <div className={Styles.rating}>

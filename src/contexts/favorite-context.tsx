@@ -11,11 +11,7 @@ type Props = {
   children: React.ReactNode
 }
 
-export const FavoriteContext = createContext<FavoriteContextType>({
-  favorites: [],
-  handleSetFavorite: (id) => id,
-  handleRemoveFavorite: (id) => id,
-})
+export const FavoriteContext = createContext<FavoriteContextType>(null)
 
 export const FavoriteProvider: React.FC<Props> = ({ children }) => {
   const [favorites, setFavorites] = useState<Character[]>([])
