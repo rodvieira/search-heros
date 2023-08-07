@@ -20,12 +20,11 @@ const characterAdapter = (characterToAdapt: CharacterRequest): Character => {
 }
 
 export const useFetchCharacter = (id: string): FetchCharacterType => {
-  const [loading, setLoading] = useState<boolean>(false)
+  const [loading, setLoading] = useState<boolean>(true)
   const [character, setCharacter] = useState<Character>()
 
   const fetchCharacter = async () => {
     try {
-      setLoading(true)
       const { data } = await instaceAxios.get(`/characters/${id}`)
       setCharacter(characterAdapter(data.data.results[0]))
     } catch (error) {

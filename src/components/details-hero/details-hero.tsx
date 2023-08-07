@@ -17,23 +17,23 @@ const DetailsHero: React.FC<Props> = ({ character }: Props) => {
     <div className={Styles.contentDescriptionHero}>
       <div className={Styles.descriptionHero}>
         <div className={Styles.nameHero}>
-          <h1>{character?.name}</h1>
+          <h1>{character.name}</h1>
           <img src={IconFavorite} />
         </div>
-        <p data-testid="character-description">{character?.description}</p>
+        <p data-testid="character-description">{character.description}</p>
         <div className={Styles.detailsHero}>
           <div>
             <p>Quadrinhos</p>
             <img src={IconComics} alt="" />
             <span data-testid="character-comics-count">
-              {character?.comicsCount}
+              {character.comicsCount}
             </span>
           </div>
           <div>
             <p>Filmes</p>
             <img src={IconTrailer} alt="" />
             <span data-testid="character-series-count">
-              {character?.seriesCount}
+              {character.seriesCount}
             </span>
           </div>
         </div>
@@ -48,7 +48,7 @@ const DetailsHero: React.FC<Props> = ({ character }: Props) => {
       </div>
       <div className={Styles.characterThumbnail}>
         <img
-          src={`${character?.thumbnail.path}.${character?.thumbnail.extension}`}
+          src={`${character.thumbnail.path}.${character.thumbnail.extension}`}
         />
       </div>
     </div>
