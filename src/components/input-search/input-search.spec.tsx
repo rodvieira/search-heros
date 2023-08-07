@@ -5,8 +5,8 @@ import userEvent from '@testing-library/user-event'
 
 const sendQueryMock = jest.fn()
 
-const makeSut = (custom = false) => {
-  return render(<InputSearch custom={custom} sendQuery={sendQueryMock} />)
+const makeSut = () => {
+  return render(<InputSearch sendQuery={sendQueryMock} />)
 }
 
 describe('InputSearch Component', () => {
@@ -19,12 +19,6 @@ describe('InputSearch Component', () => {
     const input = screen.getByTestId('input-search') as HTMLInputElement
     expect(input.placeholder).toBe('Procure por heróis')
     expect(input.className).not.toContain('custom')
-  })
-
-  test('Should render InputSearch with custom', () => {
-    makeSut(true)
-    const input = screen.getByTestId('input-search') as HTMLInputElement
-    expect(input.className).toContain('custom')
   })
 
   test('Should call handleKeyDown function when press enter key', () => {

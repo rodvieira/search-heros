@@ -27,7 +27,7 @@ const FiltersContent: React.FC<Props> = ({
 
   return (
     <div className={Styles.filtersContent}>
-      <InputSearch custom sendQuery={(e: string) => queryList(e)} />
+      <InputSearch sendQuery={(e: string) => queryList(e)} />
       <div className={Styles.countFiltersContent}>
         <div className={Styles.count}>
           <span>{`Encontrado ${amount || 0} heróis`}</span>
