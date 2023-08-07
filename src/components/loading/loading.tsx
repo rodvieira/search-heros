@@ -7,7 +7,7 @@ const Loading: React.FC = () => {
       data-testid="loading"
       style={{ display: 'flex', justifyContent: 'center', margin: '40px' }}
     >
-      <Spinner isNegative />
+      <Spinner />
     </div>
   )
 }
