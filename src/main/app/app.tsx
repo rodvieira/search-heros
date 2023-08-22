@@ -1,5 +1,5 @@
 import React from 'react'
-import Router from '@/router/router'
+import Router from '@/main/router/router'
 import { Footer } from '@/components'
 import { FavoriteProvider } from '@/contexts/favorite-context'
 
