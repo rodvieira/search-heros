@@ -20,6 +20,22 @@ describe('Hero Page', () => {
   afterEach(() => {
     jest.clearAllMocks()
   })
+  test('should show loading in details hero page', async () => {
+    const characterMock = listCharactersMock[0]
+
+    useFetchCharacterSpy.mockReturnValueOnce({
+      loading: true,
+      character: characterMock,
+    })
+    useFetchCharacterComicsSpy.mockReturnValueOnce({
+      loading: false,
+      characterComics: listComicsMock,
+    })
+
+    makeSut()
+    expect(screen.getByTestId('loading')).toBeInTheDocument()
+    expect(screen.queryByText(characterMock.name)).not.toBeInTheDocument()
+  })
   test('should show details of hero', () => {
     const characterMock = listCharactersMock[0]
 
