@@ -1,5 +1,5 @@
 import axios, { AxiosInstance } from 'axios'
-import { AxiosHttpInstace, Params } from '../types/axios-http-instance'
+import { AxiosHttpInstace, Params } from './axios-http-client.type'
 
 export class AxiosHttpClient implements AxiosHttpInstace {
   readonly baseURL: string = process.env.API_URL
@@ -13,4 +13,4 @@ export class AxiosHttpClient implements AxiosHttpInstace {
   }
 }
 
-export const instaceAxios = new AxiosHttpClient().createAxios()
+export const instanceAxios = new AxiosHttpClient().createAxios()

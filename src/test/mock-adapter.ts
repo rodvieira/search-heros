@@ -1,11 +1,11 @@
 import MockAdapter from 'axios-mock-adapter'
 
-import { instaceAxios } from '@/service/http/axios-http-client/axios-http-client'
+import { instanceAxios } from '@/service/http/axios-http-client'
 import { Character } from '@/types/character'
 
 type statusCode = 200 | 500
 
-const mock = new MockAdapter(instaceAxios)
+const mock = new MockAdapter(instanceAxios)
 
 export const listCharactersMock: Character[] = [
   {
